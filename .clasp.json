@@ -1,0 +1,16 @@
+{
+  "scriptId": "10X8pcCDplUha00xNUsHGWwYMVEIAVrTdnnUF9j5HVa9OS5rP2EjlkCNl",
+  "rootDir": "C:\/Users\/chrup\/Desktop\/Moo-app\/backend\/moo-app-backend\/dist",
+  "scriptExtensions": [
+    ".js",
+    ".gs"
+  ],
+  "htmlExtensions": [
+    ".html"
+  ],
+  "jsonExtensions": [
+    ".json"
+  ],
+  "filePushOrder": [],
+  "skipSubdirectories": false
+}
