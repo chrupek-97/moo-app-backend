@@ -42,6 +42,10 @@ export class UserService {
         this.findUserById(id);
     }
 
+    public isAuthenticated = (userEmail: string) => {
+        return this.getAllUsers().some(usr => usr.email === userEmail);
+    }
+
     private findUserByEmail = (email: string) => {
         const allUsers = this.getAllUsers();
         const findedUser = allUsers.find(user => user.email === email);

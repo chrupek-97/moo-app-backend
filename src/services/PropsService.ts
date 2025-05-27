@@ -1,5 +1,5 @@
 const ScriptProps = {
-    DatabaseUrl: "databaseUrl"
+    DatabaseId: "databaseId"
 }
 
 type ScriptKey = keyof typeof ScriptProps;
