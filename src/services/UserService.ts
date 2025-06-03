@@ -1,5 +1,5 @@
 import { User } from "../models/User";
-import { DatabaseService, DatabaseSheets } from "./DatabaseService";
+import { DatabaseService } from "./DatabaseService";
 import { MapperService } from "./MapperService";
 
 export class UserService {
@@ -9,7 +9,7 @@ export class UserService {
 
     private constructor() {
         this.dbService = DatabaseService.getInstance();
-        this.data = this.dbService.getRows("Users");
+        this.data = this.dbService.getRows("Users")
     }
 
     public static getInstance(): UserService {
@@ -21,39 +21,35 @@ export class UserService {
         return this.instance;
     }
 
-    public getAllUsers = () => MapperService.mapDataToUserArray(this.data);
+    public getAllUsers() {
+        return MapperService.mapDataArrayToUser(this.data);
+    }
 
-    public createUser = (user: User) => {
+    public createUser(user: User) {
         const toAdd = MapperService.mapUserToArray(user);
         this.dbService.addRow("Users", toAdd);
     }
 
-    public deleteUser = (user: User) => {
-        const findedUser = this.findUserByEmail(user.email);
+    public deleteUser(id: string) {
+        const findedUser = this.findUserById(id);
         this.dbService.deleteRowById("Users", findedUser.id);
     }
 
-    public editUser = (user: User) => {
+    public editUser(user: User) {
         const toEdit = MapperService.mapUserToArray(user);
+        console.log(toEdit + " toEdit")
         this.dbService.editRow("Users", user.id, toEdit);
     }
 
-    public getUser = (id: string) => {
-        this.findUserById(id);
+    public getUser(id: string) {
+        return this.findUserById(id);
     }
 
-    public isAuthenticated = (userEmail: string) => {
+    public isAuthenticated(userEmail: string) {
         return this.getAllUsers().some(usr => usr.email === userEmail);
     }
 
-    private findUserByEmail = (email: string) => {
-        const allUsers = this.getAllUsers();
-        const findedUser = allUsers.find(user => user.email === email);
-        if (!findedUser) throw new Error(`Cannot find user with email ${email}`);
-        return findedUser;
-    }
-
-    private findUserById = (id: string) => {
+    private findUserById(id: string) {
         const allUsers = this.getAllUsers();
         const findedUser = allUsers.find(user => user.id === id);
         if (!findedUser) throw new Error(`Cannot find user with id ${id}`);

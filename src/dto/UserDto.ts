@@ -1,6 +1,6 @@
 import { User } from "../models/User"
 
-export type DtoLoggedUser = {
+export type UserDto = {
     user: User;
-
 }
+
